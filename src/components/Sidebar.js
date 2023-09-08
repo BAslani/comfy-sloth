@@ -21,13 +21,14 @@ const Sidebar = () => {
       <ul className="links">
         {links.map(({id, text, url})=>{
           return <li key={id}>
-            <Link to={url}>{text}</Link>
+            <Link to={url} onClick={closeSidebar}>{text}</Link>
           </li>
         })}
         <li>
-          <Link to='/checkout'>Checkout</Link>
+          <Link to='/checkout' onClick={closeSidebar}>Checkout</Link>
         </li>
       </ul>
+      <CartButtons />
     </aside>
   </SidebarContainer>
 }
