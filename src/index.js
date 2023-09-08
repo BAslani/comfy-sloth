@@ -13,6 +13,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
     <React.StrictMode>
-        <App />
+        <ProductsProvider>
+            <App />
+        </ProductsProvider>
     </React.StrictMode>
 );
