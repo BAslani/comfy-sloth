@@ -20,6 +20,13 @@ const Nav = () => {
             <FaBars />
           </button>
         </div>
+        <ul className="nav-links">
+          {links.map(({id,text,url})=>{
+            return <li key={id}>
+              <Link to={url}>{text}</Link>
+            </li>
+          })}
+        </ul>
       </div>
     </NavContainer>
   );
