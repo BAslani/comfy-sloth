@@ -11,7 +11,14 @@ import {
 
 const filter_reducer = (state, action) => {
   if (action.type === LOAD_PRODUCTS) {
-    return { ...state, all_products: [...action.payload], filtered_products: [...action.payload] }
+    let max = action.payload.map((product)=>{
+      return product.price;
+    })
+    max = Math.max(...max)
+    return { ...state,
+      all_products: [...action.payload],
+      filtered_products: [...action.payload],
+      filters: {...state.filters, max_price: max, price: max} }
   }
   if (action.type === SET_GRIDVIEW) {
     return { ...state, grid_view: true }
