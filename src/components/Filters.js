@@ -82,6 +82,7 @@ const Filters = () => {
                 colors.map((c, index) => {
                   if (c === 'all') {
                     return <button
+                    key={index}
                     type="button"
                     name='color'
                     onClick={updateFilters}
