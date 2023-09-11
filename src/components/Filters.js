@@ -127,7 +127,7 @@ const Filters = () => {
               type="checkbox"
               name="shipping"
               id="shipping"
-              onClick={updateFilters}
+              onChange={updateFilters}
               checked={shipping}
             />
           </div>
