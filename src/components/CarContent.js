@@ -13,7 +13,7 @@ const CartContent = () => {
       <CartColumns />
       {
         cart.map((item) => {
-          return <CartItem />
+          return <CartItem {...item}/>
         })
       }
       <hr />
