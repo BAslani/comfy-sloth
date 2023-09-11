@@ -12,8 +12,8 @@ const CartContent = () => {
     <Wrapper className='section section-center'>
       <CartColumns />
       {
-        cart.map((item) => {
-          return <CartItem {...item}/>
+        cart.map((item, index) => {
+          return <CartItem key={index} {...item} />
         })
       }
       <hr />
@@ -22,9 +22,9 @@ const CartContent = () => {
           continue shopping
         </Link>
         <button
-        type="button"
-        className='link-btn clear-btn'
-        onClick={clearCart}
+          type="button"
+          className='link-btn clear-btn'
+          onClick={clearCart}
         >
           clear shopping cart
         </button>
