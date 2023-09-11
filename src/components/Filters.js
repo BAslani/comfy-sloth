@@ -30,12 +30,12 @@ const Filters = () => {
           {/* search */}
           <div className="form-control">
             <input
-            type="text"
-            name="text"
-            placeholder='search'
-            className='search-input'
-            value={text}
-            onChange={updateFilters}
+              type="text"
+              name="text"
+              placeholder='search'
+              className='search-input'
+              value={text}
+              onChange={updateFilters}
             />
           </div>
           {/* categories */}
@@ -43,17 +43,36 @@ const Filters = () => {
             <h5>category</h5>
             <div>
               {
-                categories.map((c, index)=> {
+                categories.map((c, index) => {
                   return <button
-                  key={index}
-                  onClick={updateFilters}
-                  name='category'
-                  type='button'
-                  className={`${category === c.toLowerCase() && 'active'}`}
+                    key={index}
+                    onClick={updateFilters}
+                    name='category'
+                    type='button'
+                    className={`${category === c.toLowerCase() && 'active'}`}
                   >{c}</button>
                 })
               }
             </div>
+          </div>
+          {/* companies */}
+          <div className="form-control">
+            <h5>company</h5>
+            <select
+              name="company"
+              value={company}
+              onChange={updateFilters}
+              className='company'
+            >
+              {companies.map((c, index) => {
+                return <option
+                key={index}
+                value={c}
+                >
+                  {c}
+                </option>
+              })}
+            </select>
           </div>
         </form>
       </div>
