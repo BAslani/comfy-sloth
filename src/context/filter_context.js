@@ -24,7 +24,7 @@ const initialState = {
     color: 'all',
     min_price: 0,
     max_price: 0,
-    price:0,
+    price: 0,
     shipping: false
   }
 }
@@ -40,9 +40,9 @@ export const FilterProvider = ({ children }) => {
   }, [products])
 
   useEffect(() => {
-    dispatch({type: FILTER_PRODUCTS})
-    dispatch({type: SORT_PRODUCTS})
-  },[products, state.sort, state.filters])
+    dispatch({ type: FILTER_PRODUCTS })
+    dispatch({ type: SORT_PRODUCTS })
+  }, [products, state.sort, state.filters])
 
   const set_grid_view = () => {
     dispatch({ type: SET_GRIDVIEW })
@@ -59,10 +59,13 @@ export const FilterProvider = ({ children }) => {
   const updateFilters = (e) => {
     let name = e.target.name
     let value = e.target.value
-    if(name === 'category') {
+    if (name === 'category') {
       value = e.target.textContent;
     }
-    dispatch({type: UPDATE_FILTERS, payload: {name, value}})
+    if (name === 'color') {
+      value = e.target.dataset.color
+    }
+      dispatch({ type: UPDATE_FILTERS, payload: { name, value } })
   }
 
   const clearFilters = () => {
