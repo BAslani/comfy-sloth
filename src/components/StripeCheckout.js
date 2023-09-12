@@ -13,16 +13,86 @@ import { useUserContext } from '../context/user_context'
 import { formatPrice } from '../utils/helpers'
 import { useHistory } from 'react-router-dom'
 
+const promise = loadStripe(process.env.REACT_APP_STRIPE_KEY)
+
 const CheckoutForm = () => {
+  const { cart, total_amount, shipping_fee, clearCart } = useCartContext();
+  const { myUser } = useUserContext();
+
+  const [succeeded, setSucceeded] = useState(false);
+  const [error, setError] = useState(null);
+  const [processing, setProcessing] = useState('');
+  const [disabled, setDisabled] = useState(true)
+  const [clientSecret, setClientSecret] = useState('')
+  const stripe = useStripe()
+  const elements = useElements()
+
+  const cardStyle = {
+    style: {
+      base: {
+        color: '#32325d',
+        fontFamily: 'Arial, sans-serif',
+        fontSmoothing: 'antialiased',
+        fontSize: '16px',
+        '::placeholder': {
+          color: '#32325d',
+        },
+      },
+      invalid: {
+        color: '#fa755a',
+        iconColor: '#fa755a',
+      },
+    },
+  };
+
+  const createPaymentIntent = async () => {
+    console.log('hi there');
+  }
+
+  useEffect(() => {
+    createPaymentIntent()
+    // eslint-disable-next-line
+  }, [])
+
+  const handleChange = async (event) => { }
+  const handleSubmit = async (event) => { }
+
   return (
-    <h2>hello stripe checkout</h2>
+    <div>
+      <form id='payment-form' onSubmit={handleSubmit}>
+        <CardElement
+          id='card-element'
+          options={cardStyle}
+          onChange={handleChange}
+        />
+        <button disabled={processing || disabled || succeeded} >
+          <span id='button-text'>{processing ? <div className="spinner" id='spinner'></div> :
+            'Pay'
+          }</span>
+        </button>
+        {/* show errors */}
+        {error && <div className="card-error" role='alert'>
+          {error}
+        </div> }
+        {/* show success */}
+        <p className={succeeded?'resul-message':'result-message hidden'}>
+          payment succeeded, see the result in your
+          <a href={`https://dashboard.stripe.com/test/payments`}>
+            stripe dashboard
+          </a>
+          refresh the page again
+        </p>
+      </form>
+    </div>
   )
 }
 
 const StripeCheckout = () => {
   return (
     <Wrapper>
-      <CheckoutForm />
+      <Elements stripe={promise} >
+        <CheckoutForm />
+      </Elements>
     </Wrapper>
   )
 }
