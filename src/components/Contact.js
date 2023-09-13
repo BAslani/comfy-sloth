@@ -15,7 +15,7 @@ const Contact = () => {
           action="https://formspree.io/f/mbjvybwz"
           method="POST"
           >
-            <input type="email" className='form-input' name="email" placeholder='enter email' />
+            <input type="email" className='form-input' name="email" placeholder='enter email' autoComplete=''/>
             <button type="submit" className='submit-btn'>subscribe</button>
           </form>
         </div>
