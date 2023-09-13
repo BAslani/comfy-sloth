@@ -7,11 +7,8 @@ import { HiCreditCard } from "react-icons/hi";
 
 
 const StripeCheckout = () => {
-  const { total_amount, shipping_fee } = useCartContext();
+  const { total_amount, shipping_fee, clearCart } = useCartContext();
   const { myUser } = useUserContext();
-  const [processing, setProcessing] = useState(false)
-  const [error, setError] = useState('')
-
 
   return (
     <Wrapper>
@@ -26,17 +23,11 @@ const StripeCheckout = () => {
           <input type="number" placeholder='month ' className='card-date'/>
           <input type="number" placeholder='year ' className='card-date'/>
         </div>
-        <button id='submit'>
+        <button id='submit' onClick={clearCart}>
           <span id='button-text'>
-            {processing ? <div className='spinner' id='spinner'></div> : 'Pay'}
+            Pay
           </span>
         </button>
-        {/* Show any error that happens when processing the payment */}
-        {error && (
-          <div className='card-error' role='alert'>
-            {error}
-          </div>
-        )}
       </form>
     </Wrapper>
   )
@@ -54,6 +45,7 @@ const Wrapper = styled.section`
   }
   .card-container{
     display: flex;
+    justify-content: space-between;
     margin-bottom: 0.25rem
   }
   .credit-card {
@@ -65,7 +57,7 @@ const Wrapper = styled.section`
     padding: 6px;
     border: 1px solid rgba(50, 50, 93, 0.1);
     max-height: 30px;
-    max-width: 10rem;
+    width: auto;
     font-size: 12px;
     background: white;
     box-sizing: border-box;
